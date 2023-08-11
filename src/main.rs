@@ -1,3 +1,20 @@
-fn main() {
-    println!("Hello, world!");
+extern crate log;
+
+mod app;
+mod service;
+
+use app::app as application;
+
+#[actix_web::main]
+async fn main() {
+    dotenv::dotenv().unwrap();
+    pretty_env_logger::init();
+
+    match application::run().await {
+        Err(err) => {
+            log::error!("Error: {}", err);
+            std::process::exit(1);
+        },
+        Ok(_) => {},
+    }
 }
