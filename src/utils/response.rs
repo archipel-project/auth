@@ -20,11 +20,11 @@ pub fn unauthorized<T: Serialize>(message: String, json: T) -> HttpResponse {
     });
 }
 
-pub fn ok<T: Serialize>(message: String, json: T) -> HttpResponse {
+pub fn ok<T: Serialize, S: ToString>(message: S, json: T) -> HttpResponse {
     return HttpResponse::Ok().json(response::Response {
         code: 200,
         status: "OK".into(),
-        message: message,
+        message: message.to_string(),
         content: json
     });
 }

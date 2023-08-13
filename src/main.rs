@@ -2,6 +2,7 @@ extern crate log;
 
 mod app;
 mod service;
+mod utils;
 
 use app::app as application;
 
