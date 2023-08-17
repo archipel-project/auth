@@ -1,0 +1,23 @@
+version: '3.7'
+
+services:
+  archipel-postgres:
+    image: postgres:alpine
+    container_name: archipel-postgres
+
+    environment:
+      POSTGRES_USER: archipel
+      POSTGRES_PASSWORD: 123456
+      POSTGRES_DB: auth
+      PGDATA: /data/postgres
+
+    volumes:
+      - database:/data/postgres
+
+    ports:
+      - 5432:5432
+
+    restart: always
+
+volumes:
+  database:

@@ -8,14 +8,14 @@ use app::app as application;
 
 #[actix_web::main]
 async fn main() {
-    dotenv::dotenv().unwrap();
+    dotenvy::dotenv().unwrap();
     pretty_env_logger::init();
 
     match application::run().await {
+        Ok(_) => {},
         Err(err) => {
             log::error!("Error: {}", err);
             std::process::exit(1);
         },
-        Ok(_) => {},
     }
 }

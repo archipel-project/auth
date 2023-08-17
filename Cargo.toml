@@ -7,15 +7,27 @@ edition = "2021"
 
 [dependencies]
 actix-web = "4"
-dotenv = "0.15.0"
+dotenvy = "0.15.0"
 thiserror = "1"
-
-serde = { version = "1.0.183", features = ["derive"] }
-
-sqlx = { version = "0", features = ["all-databases", "any", "runtime-tokio-rustls", "chrono", "macros" ] }
-
 pretty_env_logger = "0"
+
+serde = { version = "1.0.183", features = [
+    "derive",
+] }
+
 log = { version = "0", features = [
     "max_level_trace",
     "release_max_level_warn",
+] }
+
+sea-orm = { workspace = true }
+
+[workspace.dependencies]
+sea-orm = { version = "^0", features = [
+    "sqlx-mysql",
+    "sqlx-postgres",
+    "sqlx-sqlite",
+    "runtime-actix-rustls",
+    "chrono",
+    "macros",
 ] }

@@ -1,13 +1,12 @@
 use actix_web::{App, HttpServer, web::Data};
 
-use crate::{service::routes::routing, app::{database, config::env::Env}};
+use crate::{service::routes::routing, app::{database, config::server}};
 
 pub async fn run() -> Result<(), Box<dyn std::error::Error>> {
-    let config = Env::load()?;
-    let server = config.get_server();
+    let config = server::Server::load()?;
+    let server = config.formatted();
 
-    let database = database::builder().await?;
-    database::migrate(&database).await?;
+    let database = database::database::connect().await?;
 
     log::debug!("Serving at http://{}", server);
 
